@@ -54,12 +54,10 @@ filetype plugin indent on    " required
 " -----------------------------------------------
 
 " Usability Preferences
-
-" Change leader to comma
+"" Change leader to comma
 let mapleader="\<Space>"
 
-syntax on
-" Colors
+"" Colors
 
 let g:PromptTerm=0
 let g:SolarColorSet="light"
@@ -69,14 +67,15 @@ if &term =~ '256color'
     set t_ut=
 endif
 
-" Indentation
+"" Indentation
 set tabstop=4       " number of visual spaces per TAB
 set softtabstop=4   " number of spaces in tab when editing
 set shiftwidth=4    " indenting is 4 spaces
 set expandtab       " tabs are spaces
 set smartindent     " indent blocks automatically
 
-" UI Config
+"" UI Config
+syntax on
 set number          " show line numbers
 set showcmd         " show command in bottom bar
 set cursorline      " highlight current line
@@ -86,25 +85,25 @@ set lazyredraw      " redraw only when we need to
 set showmatch
 set colorcolumn=80  " Make a mark for column 80
 
-" Search Improvements
+"" Search Improvements
 set incsearch       " search as characters are entered
 set hlsearch        " highlight matches
 set smartcase       " case-sensitive when capitals are used
-" turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
+"" turn off search highlight
+nnoremap <leader>, :nohlsearch<CR>
 
-" Folding
+"" Folding
 set foldenable      " enable folding
 set foldlevelstart=10   " open most folds by default
 set foldnestmax=10  " 10 nested folds max
 set foldmethod=indent   " auto-fold based on indentation
 
-" Buffer
+"" Buffer
 au BufRead,BufNewFile *.md set filetype=markdown    " .md = markdown syntax
 set hidden          " deleted buffers are hidden instead
 set history=1000    " increase undo history
 
-" General Usability Improvements
+"" General Usability Improvements
 set autoread        " read file after saving or opening buffer
 set scrolloff=3     " keep 3 lines visible around cursor at all times
 set title           " title of window = vim
@@ -112,16 +111,16 @@ set title           " title of window = vim
 filetype on
 filetype plugin on
 
-" Change Default Behaviors
+"" Change Default Behaviors
 set ttimeoutlen=200 " fix shift-o delay
 set backspace=indent,eol,start  " backspace is not limited to current edit position
 set visualbell      " use visual cues for bell instead of sound
 
-" Custom extras
+"" Custom extras
 set wildmode=list:longest       " ?
 
 " Keybinds
-" Toggle Colors adjusts for term type
+"" Toggle Colors adjusts for term type
 function! ToggleSolarColors(currentBG)
     if a:currentBG == "dark"
         let g:SolarColorSet="light"
@@ -146,20 +145,18 @@ call ToggleSolarColors(SolarColorSet)
 nmap <F9> :call ToggleSolarColors(SolarColorSet)<CR>
 nmap <F10> :call TogglePromptTermColor()<CR>
 
-" Move vertically by visual line
+"" Move vertically by visual line
 nnoremap j gj
 nnoremap k gk
 
-" Switch ' to more useful `
+"" Switch ' to more useful `
 nnoremap ' `
 nnoremap ` '
 
-" Remove trailing whitespace
+"" Remove trailing whitespace
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
-" save session
-
-" leader bindings
+"" leader bindings
 
 nnoremap <Leader>o :CtrlP<CR>
 nnoremap <Leader>w :w<CR>
@@ -170,54 +167,43 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 
-" Buffer navigation binds
+"" Buffer navigation binds
 nmap <leader>n :bn<cr>
 nmap <leader>b :bp<cr>
 nmap <leader>d :bd<cr>
 
-" Create a VIM session to resume
+"" Create a VIM session to resume
 nnoremap <leader>s :mksession<CR>
 
 " Plugin Support
-
-" Indent Guides
+"" Indent Guides
 let g:indent_guides_guide_size = 1
 
-" Syntastic
+"" Syntastic
 let g:syntastic_javascript_checkers = ['jshint']
 
-" delimitMate
+"" delimitMate
 let delimitMate_expand_cr = 1
 
-" Toggle background color
+"" Toggle background color
 call togglebg#map("<F6>")
 
-" YouCompleteMe Options
+"" YouCompleteMe Options
 let g:ycm_add_preview_to_completeopt=0
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_autoclose_preview_window_after_insertion=1
 set omnifunc=syntaxcomplete#Complete
 
-" HTML Completion
+"" HTML Completion
 inoremap <F2> </<C-X><C-O>
 
-" UltiSnips Support
+"" UltiSnips Support
 let g:UltiSnipsExpandTrigger="<c-j>"
 
-" Lightline
+"" Lightline
 set laststatus=2
-" let g:lightline = {
-"     \ 'colorscheme': '16color',
-"     \ }
-" let g:lightline.enable = {
-"     \ 'tabline': 0
-"     \ }
 
-" Airline
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-
-" set laststatus=0
+"" Create buffer tab bar
 set showtabline=2
 set tabline=%!Tabline()
 function! Tabline()
