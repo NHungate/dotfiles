@@ -260,7 +260,7 @@ function! ToggleSolarColors(currentBG)
         let g:SolarColorSet="dark"
         set background=dark
     endif
-    colorscheme Solarized
+    colorscheme solarized
     " execute 'AirlineRefresh'
 endfunc
 
