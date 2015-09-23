@@ -1,0 +1,40 @@
+snippet emInit "Initialize an emberJS file" b
+var $1 = Ember.Application.create({
+	$0
+});
+endsnippet
+snippet emRouter "Create an emberJS Router" b
+$1.Router.map(function() {
+	this.$2('$0');
+});
+endsnippet
+snippet emArCont "Create an emberJS Controller" b
+$1.$2Controller = Ember.Controller.extend({
+	$0
+});
+endsnippet
+snippet emArCont "Create an emberJS ArrayController" b
+$1.$2Controller = Ember.ArrayController.extend({
+	$0
+});
+endsnippet
+snippet emObCont "Create an emberJS ObjectController" b
+$1.$2Controller = Ember.ObjectController.extend({
+	$0
+});
+endsnippet
+snippet emRoute "Create an emberJS Route (not router)" b
+$1.$2Route = Ember.Route.extend({
+	$0
+});
+endsnippet
+snippet emDSModel "Create an emberJS Data Model" b
+$1.$2 = Ember.Model.extend({
+	$0
+});
+endsnippet
+snippet emDSFixture "Create an emberJS FIXTURE" b
+$1.$2.FIXTURES = [
+	$0
+]
+endsnippet

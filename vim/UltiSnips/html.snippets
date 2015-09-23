@@ -287,4 +287,32 @@ snippet movie "Embed QT movie (movie)" b
 	`!p x(snip)`>
 </object>
 endsnippet
+
+snippet emTemplate "Standard emberJS template" b
+<script type="text/x-handlebars" data-template-name="$1">
+	$0
+</script>
+endsnippet
+snippet emComponent "Ember Component" b
+<script type="text/x-handlebars" data-template-name="components/$1">
+	$0
+</script>
+endsnippet
+snippet db "Data-Bind" w
+data-bind="$0"
+endsnippet
+snippet ko;temp "Knockout Template" b
+<script id="$1" type="text/html">
+	$0
+</script>
+endsnippet
+snippet :ko "Knockout Virtual Element" w
+<!-- ko: $0 -->
+endsnippet
+snippet /ko "Knockout Virtual Element End" i
+<!-- /ko -->
+endsnippet
+snippet awsm "Font Awesome Inline" w
+<i class="fa fa-$0"></i>
+endsnippet
 # vim:ft=snippets:

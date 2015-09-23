@@ -1,5 +1,5 @@
-L9
-Neocomplete.vim
+Neocomplcache.vim
+ctrlp-cmatcher
 ctrlp.vim
 emmet-vim
 matchit
@@ -10,9 +10,16 @@ numbers.vim
 syntastic
 tabular
 tagbar
+ultisnips
 vim-csscomb
 vim-easymotion
 vim-fugitive
+vim-fuzzyfinder
 vim-indent-guides
+vim-javascript
+vim-javascript-syntax
+vim-l9
+vim-repeat
+vim-snippets
 vim-surround
 vimproc.vim
