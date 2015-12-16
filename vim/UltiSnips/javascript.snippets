@@ -1,7 +1,12 @@
-snippet fn "JS Function" wm
+snippet fn "Javascript Function Declaration" wm
 function $1($2) {
 	$0
 }
+endsnippet
+snippet afn "Javascript Function Assignment" wm
+$1 = function($2) {
+	$0
+};
 endsnippet
 snippet todo "Inline To-Do comment" w
 // TODO NJH: $0
@@ -25,7 +30,7 @@ snippet .prms "jQuery Promise response" i
 });
 endsnippet
 snippet rmodule "Revealing Module Pattern" wm
-var $1 = function ($2) {
+var $1 = function($2) {
 	$0
 
 	// Reveal public pointers to private functions and properties
@@ -33,58 +38,83 @@ var $1 = function ($2) {
 	};
 }();
 endsnippet
-snippet for "JS For loop" wm
+snippet floop "JS For loop" wm
 for (var i = $1, max = $2; i < max; i +=1) {
 	$0
 }
 endsnippet
 snippet ko.cmd "Knockout Command" w
 ko.command({
-	execute: function () {
+	execute: function() {
 		$0
 	},
-	canExecute: function () {
+	canExecute: function() {
 		return true;
 	}
 });
 endsnippet
 snippet ko.acmd "Knockout Async Command" w
 ko.asyncCommand({
-	execute: function (complete) {
+	execute: function(complete) {
 		$0
 		return true;
 	},
-	canExecute: function (isExecuting) {
+	canExecute: function(isExecuting) {
 		return true;
 	}
 });
 endsnippet
 snippet ko.obs "Knockout Observable" wm
-ko.observable($0);
+ko.observable($1);$0
 endsnippet
 snippet ko.ary "Knockout Observable Array" wm
-ko.observableArray($0);
+ko.observableArray(${1:[]});$0
 endsnippet
 snippet ko.comp "Knockout Computed" wm
-ko.computed(function () {
+ko.computed(function() {
 	return$0;
 });
 endsnippet
 snippet ko.pcomp "Knockout Pure Computed" wm
-ko.pureComputed(function () {
+ko.pureComputed(function() {
 	return$0;
 });
 endsnippet
-snippet ko.wpcomp "Knockout Component (Webpack)" wm
-function $1 ($2) {
+snippet ko.vm "Knockout ViewModel" wm
+function $1() {
+	if (!(this instanceof $1)) { return new $1(params); }
+
 	var self = this;
 
 	// Data
-	$0
 
 	// Behaviors
 
 	// Exports
+	return this;
+}
+
+var vm = new $1();
+
+ko.applyBindings(vm);
+
+module.exports = vm;
+endsnippet
+snippet ko.wpcomp "Knockout Component (Webpack)" wm
+function $1(${2:params}) {
+	if (!(this instanceof $1)) { return new $1($2); }
+
+	var self = this;
+
+	// Data
+	$0
+	// Behaviors
+
+	// Exports
+	if ($2 && $2.exports) {
+		$2.exports({
+		});
+	}
 	return this;
 }
 
