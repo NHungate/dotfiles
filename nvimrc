@@ -5,13 +5,12 @@ call plug#begin()
 
 "" My Plugins
 Plug 'tpope/vim-sensible'
-Plug 'junegunn/vim-plug'
 Plug 'tmhedberg/matchit'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
@@ -20,8 +19,9 @@ Plug 'ervandew/supertab'
 Plug 'kien/ctrlp.vim'
 Plug 'JazzCore/ctrlp-cmatcher'
 Plug 'godlygeek/tabular'
-Plug 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
-Plug 'https://bitbucket.org/ns9tks/vim-l9'
+Plug 'easymotion/vim-easymotion'
+" Plug 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
+" Plug 'https://bitbucket.org/ns9tks/vim-l9'
 Plug 'scrooloose/syntastic'
 
 "" Web Development
@@ -29,8 +29,11 @@ Plug 'scrooloose/syntastic'
 Plug 'mattn/emmet-vim', { 'for': 'html' }
 
 """ Javascript
-Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }
+" Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+Plug 'jelera/vim-javascript-syntax' 
+Plug 'moll/vim-node'
 
 call plug#end()
 
