@@ -29,6 +29,14 @@ snippet .prms "jQuery Promise response" i
 .always(function() {
 });
 endsnippet
+snippet .then "jQuery Promise response" i
+.then(${1:function(data, textStatus, jqXHR) {
+${2: // Done}
+}}${3:,
+function(jqXHR, textStatus, errorThrown) {
+${4: // Fail}
+}});
+endsnippet
 snippet rmodule "Revealing Module Pattern" wm
 var $1 = function($2) {
 	$0
@@ -122,4 +130,7 @@ module.exports = {
 	viewModel: $1,
 	template: require('./$3.html')
 };
+endsnippet
+snippet jd;prm "JSDoc Parameter" b
+* @param {${1:Type}} ${2:Name} - ${3:Description}
 endsnippet
