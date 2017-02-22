@@ -307,12 +307,42 @@ snippet ko.temp "Knockout Template" b
 </script>
 endsnippet
 snippet :ko "Knockout Virtual Element" w
-<!-- ko: $0 -->
+<!-- ko ${1:binding}: ${0:condition} -->
 endsnippet
 snippet /ko "Knockout Virtual Element End" i
 <!-- /ko -->
 endsnippet
 snippet fa- "Font Awesome Inline" w
 <i class="fa fa-$0"></i>
+endsnippet
+
+snippet bs;modal "Bootstrap Modal" b
+<div class="modal" id="${1:Modal ID}" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">${2:Title text}</h4>
+			</div>
+			<div class="modal-body">
+				${3:Body}
+			</div>
+			<div class="modal-footer">
+				${4:Footer}
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+endsnippet
+
+snippet bs;fg "Bootstrap Form Group" b
+<div class="form-group">
+	<label class="control-label" for="$1"></label>
+	<${2:control type} class="form-control" id="$1"${3: type="$4"}></$2>
+</div>
+endsnippet
+
+snippet todo "TODO Item" b
+ <!-- TODO NJH: $0 -->
 endsnippet
 # vim:ft=snippets:
