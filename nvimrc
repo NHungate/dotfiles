@@ -7,7 +7,6 @@ call plug#begin()
 Plug 'tpope/vim-sensible'
 Plug 'tmhedberg/matchit'
 Plug 'Yggdroot/indentLine'
-" Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -19,23 +18,24 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'vim-scripts/FuzzyFinder' | Plug 'vim-scripts/L9'
-Plug 'neomake/neomake' | Plug 'benjie/neomake-local-eslint.vim'
+Plug 'neomake/neomake'
 Plug 'jiangmiao/auto-pairs'
-Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
 
 "" Web Development
 """ HTML
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'typescript', 'xml'] }
-Plug 'hail2u/vim-css3-syntax'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'othree/html5.vim'
+Plug 'othree/html5.vim', { 'for': ['html'] }
+
+""" CSS
+Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss'] }
+Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss'] }
 
 """ Javascript
-Plug 'pangloss/vim-javascript' | Plug 'mxw/vim-jsx'
-Plug 'moll/vim-node'
-Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/vim-js-pretty-template'
+Plug 'pangloss/vim-javascript', { 'for': ['javascript'] } | Plug 'mxw/vim-jsx', { 'for': ['javascript'] }
+Plug 'moll/vim-node', { 'for': ['javascript'] }
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
 
 call plug#end()
 """"""""""""""""
@@ -45,21 +45,15 @@ call plug#end()
 "" Prevent autocomplete for tags
 set cpt-=t
 
-" Usability Preferences
+""""""""""""""""
+" Vim Settings "
+""""""""""""""""
+
 "" Change leader to space
 let mapleader="\<Space>"
 
 "" Colors
-set background=dark
 colorscheme molokai
-set termguicolors
-
-" Vim
-" let g:hybrid_custom_term_colors = 1
-" let g:indentLine_color_term = 239
-
-" GVim
-" let g:indentLine_color_gui = '#A4E57E'
 
 "" Indentation
 set tabstop=4       " number of visual spaces per TAB
@@ -74,7 +68,7 @@ set lazyredraw            " redraw only when we need to
 set showmatch             " Show matching bracket
 set colorcolumn=80        " Make a mark for column 80
 set wildmode=list:longest " Show list of commands with Tab completion
-set listchars=tab:▸\ ,eol:¬
+set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 set list
 
 "" Search Improvements
@@ -127,7 +121,7 @@ augroup configgroup
     autocmd FileType typescript setlocal tabstop=2
     autocmd FileType typescript setlocal shiftwidth=2
     autocmd FileType typescript setlocal softtabstop=2
-    autocmd BufWritePre *.py,*.js :call Preserve("%s/\\s\\+$//e")
+    autocmd BufWritePre *.py,*.js,*.ts :call Preserve("%s/\\s\\+$//e")
     autocmd FileType php setlocal expandtab
     autocmd FileType php setlocal list
     autocmd FileType php setlocal listchars=tab:+\ ,eol:-
@@ -149,9 +143,9 @@ augroup configgroup
     let g:html_indent_inctags = "html,body,head,tbody"
 augroup END
 
-"
-" Keybinds
-"
+""""""""""""
+" Keybinds "
+""""""""""""
 
 "" Check if files have changed
 nmap <F5> :checktime<CR>
@@ -192,9 +186,9 @@ nnoremap <leader>s :mksession!<CR>
 nnoremap <leader>lo :lopen<CR>
 nnoremap <leader>lc :lclose<CR>
 
-"
-" Functions
-"
+"""""""""""""
+" Functions "
+"""""""""""""
 
 "" Remove trailing whitespace
 function! Preserve(command)
@@ -211,9 +205,9 @@ endfunction
 nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap _= :call Preserve("normal gg=G")<CR>
 
-"
-" Configuration for Plug libraries
-"
+""""""""""""""""""
+" Library Config "
+""""""""""""""""""
 
 "" FZF
 nmap <C-p> :Files<CR>
@@ -235,8 +229,8 @@ endif
 "" Use deoplete.
 let g:deoplete#enable_at_startup = 1
 
-autocmd FileType typescript JsPreTmpl html
-autocmd FileType typescript syn clear foldBraces
+" autocmd FileType typescript JsPreTmpl html
+" autocmd FileType typescript syn clear foldBraces
 
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
