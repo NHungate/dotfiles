@@ -19,9 +19,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegu
 Plug 'easymotion/vim-easymotion'
 Plug 'vim-scripts/FuzzyFinder' | Plug 'vim-scripts/L9'
 Plug 'neomake/neomake'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
+Plug 'tomasr/molokai'
 
 "" Web Development
 """ HTML
@@ -86,6 +87,7 @@ set foldmethod=indent " auto-fold based on indentation
 au BufRead,BufNewFile *.md set filetype=markdown " .md = markdown syntax
 au BufRead,BufNewFile *.cshtml set filetype=html 
 au BufRead,BufNewFile *.twig set filetype=html 
+au BufRead,BufNewFile *.jsx set filetype=javascript 
 set hidden                                       " deleted buffers are hidden instead
 
 "" General Usability Improvements
