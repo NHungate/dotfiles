@@ -284,3 +284,4 @@ let g:jsx_ext_required = 0
 
 ""
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=8
+let g:indent_guides_enable_on_vim_startup = 1
