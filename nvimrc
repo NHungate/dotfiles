@@ -26,7 +26,7 @@ Plug 'tomasr/molokai'
 
 "" Web Development
 """ HTML
-Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'typescript', 'xml'] }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'typescript', 'xml'] }
 Plug 'othree/html5.vim', { 'for': ['html'] }
 
 """ CSS
@@ -34,8 +34,8 @@ Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss'] }
 Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss'] }
 
 """ Javascript
-Plug 'pangloss/vim-javascript', { 'for': ['javascript'] } | Plug 'mxw/vim-jsx', { 'for': ['javascript'] }
-Plug 'moll/vim-node', { 'for': ['javascript'] }
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] } | Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'moll/vim-node', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
 
 call plug#end()
