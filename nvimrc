@@ -6,7 +6,8 @@ call plug#begin()
 "" My Plugins
 Plug 'tpope/vim-sensible'
 Plug 'tmhedberg/matchit'
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -280,3 +281,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 "" vim-jsx
 let g:jsx_ext_required = 0
+
+""
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=8
