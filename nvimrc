@@ -118,6 +118,9 @@ augroup configgroup
     autocmd FileType javascript setlocal tabstop=2
     autocmd FileType javascript setlocal shiftwidth=2
     autocmd FileType javascript setlocal softtabstop=2
+    autocmd FileType javascript.jsx setlocal tabstop=2
+    autocmd FileType javascript.jsx setlocal shiftwidth=2
+    autocmd FileType javascript.jsx setlocal softtabstop=2
     autocmd FileType typescript setlocal tabstop=2
     autocmd FileType typescript setlocal shiftwidth=2
     autocmd FileType typescript setlocal softtabstop=2
