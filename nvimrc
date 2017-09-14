@@ -51,6 +51,7 @@ Plug 'morhetz/gruvbox'
 """ Syntax
 Plug 'sheerun/vim-polyglot'
 Plug 'wokalski/autocomplete-flow'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': ['javascript', 'javascript.jsx', 'typescript'] }
 
 """ HTML
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'typescript', 'xml'] }
@@ -254,9 +255,10 @@ endif
 "" Use deoplete.
 let g:deoplete#enable_at_startup = 1
 let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.javascript = [
-  \ 'jspc#omni'
+  \ 'tern#Complete'
 \]
 
 " Plugin key-mappings.
@@ -351,3 +353,6 @@ let g:airline_mode_map = {
 let g:vim_json_syntax_conceal = 0
 let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
+
+let g:tern_show_argument_hints='on_hold'
+let g:tern_map_keys=1
