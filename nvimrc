@@ -99,8 +99,8 @@ set colorcolumn=80        " Make a mark for column 80
 set wildmode=list:longest " Show list of commands with Tab completion
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 set list
-set splitright
-set splitbelow
+" set splitright
+" set splitbelow
 
 "" Search Improvements
 set hlsearch        " highlight matches
