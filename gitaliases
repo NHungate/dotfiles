@@ -1,0 +1,70 @@
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    ; plain = white
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[alias]
+    cl = clone
+    f = fetch -p
+    co = checkout
+    cob = checkout -b
+    st = status -sb
+    br = branch
+    brm = branch --merged
+    brnm = branch --no-merged
+    bra = branch -ra
+    branch = branch -ra
+    bd = branch -d
+    bD = branch -D
+    ai = add --interactive
+    ci = commit
+
+    cp = cherry-pick
+
+    diff = diff --word-diff
+    dc = diff --cached
+    grep = grep -Ii
+    gr = grep -Ii
+
+    hist = log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'
+    tlog = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
+    type = cat-file -t
+    dump = cat-file -p
+
+    ls = log --pretty=format:"%C(green)%h\\ %C(yellow)(%ad)%Cred%d\\ %Creset%s%Cblue\\ <%cn>" --decorate --date=relative
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    fl = log -u
+    filelog = log -u
+
+    r = reset
+    rs1 = git reset --soft HEAD^
+    rs2 = git reset --soft HEAD^^
+    rh1 = git reset --hard HEAD^
+    rh2 = git reset --hard HEAD^^
+    rh = reset --hard
+
+    sl = stash list
+    sa = stash apply
+    ss = stash save
+
+    ours = "!f() { git co --ours $@ && git add $@; }; f"
+    theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+
+    rem="!git config -l | grep remote.*url | tail -n +2"

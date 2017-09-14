@@ -6,43 +6,59 @@ call plug#begin()
 "" My Plugins
 Plug 'tpope/vim-sensible'
 Plug 'tmhedberg/matchit'
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
-Plug 'airblade/vim-gitgutter'
-Plug 'Shougo/neosnippet' | Plug 'Shougo/neosnippet-snippets'
-Plug 'easymotion/vim-easymotion'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'godlygeek/tabular'
+
+"" Search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'vim-scripts/FuzzyFinder' | Plug 'vim-scripts/L9'
+
+"" Completion
+Plug 'Shougo/neosnippet' | Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+"" UI
+Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'nathanaelkane/vim-indent-guides'
+
+"" Navigation
+Plug 'easymotion/vim-easymotion'
 Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+Plug 'chrisbra/NrrwRgn'
+Plug 'gregsexton/MatchTag'
+Plug 'terryma/vim-multiple-cursors'
+
+Plug 'tpope/vim-fugitive'
+Plug 'bronson/vim-trailing-whitespace'
+
+"" Linting
+Plug 'w0rp/ale'
 
 "" Notes
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
 
+"" No-distraction editor mode
+Plug 'junegunn/goyo.vim'
+
 "" Colorschemes
-Plug 'tomasr/molokai'
 Plug 'morhetz/gruvbox'
-Plug 'gosukiwi/vim-atom-dark'
 
 "" Web Development
+""" Syntax
+Plug 'sheerun/vim-polyglot'
+Plug 'wokalski/autocomplete-flow'
+
 """ HTML
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'typescript', 'xml'] }
-Plug 'othree/html5.vim', { 'for': ['html'] }
-""" CSS
-Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss'] }
-Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss'] }
 
 """ Javascript
-Plug 'w0rp/ale'
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] } | Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'moll/vim-node', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-" Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-" Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'typescript', 'xml'] }
+Plug 'sbdchd/neoformat'
 
 call plug#end()
 """"""""""""""""
@@ -95,12 +111,12 @@ set ignorecase      " Search is case insensitive
 set foldenable        " enable folding
 set foldlevelstart=10 " open most folds by default
 set foldnestmax=10    " 10 nested folds max
-set foldmethod=indent " auto-fold based on indentation
+set foldmethod=syntax " auto-fold based on indentation
 
 "" Buffer
 au BufRead,BufNewFile *.md set filetype=markdown " .md = markdown syntax
-au BufRead,BufNewFile *.cshtml set filetype=html 
-au BufRead,BufNewFile *.twig set filetype=html 
+au BufRead,BufNewFile *.cshtml set filetype=html
+au BufRead,BufNewFile *.twig set filetype=html
 set hidden                                       " deleted buffers are hidden instead
 
 "" General Usability Improvements
@@ -136,7 +152,7 @@ augroup configgroup
     autocmd FileType typescript setlocal tabstop=2
     autocmd FileType typescript setlocal shiftwidth=2
     autocmd FileType typescript setlocal softtabstop=2
-    autocmd BufWritePre *.py,*.js,*.ts :call Preserve("%s/\\s\\+$//e")
+    autocmd BufWritePre *.js,*.jsx Neoformat
     autocmd FileType php setlocal expandtab
     autocmd FileType php setlocal list
     autocmd FileType php setlocal listchars=tab:+\ ,eol:-
@@ -161,6 +177,9 @@ augroup END
 """"""""""""
 " Keybinds "
 """"""""""""
+set backupdir=~/.config/nvim/backup/
+set directory=~/.config/nvim/backup/
+
 "" Check if files have changed
 nmap <F5> :checktime<CR>
 
@@ -186,6 +205,8 @@ vmap <Leader>P "+P
 nmap <Leader>p "+p
 nmap <Leader>P "+P
 
+nmap <C-k>g :Goyo<CR>
+
 "" Buffer navigation binds
 nmap <leader>n :bn<cr>
 nmap <leader>N :bp<cr>
@@ -208,21 +229,6 @@ function! BotTerm()
     :bel split | wincmd J | resize 15 | term
 endfunction
 nnoremap <C-w>t :call BotTerm()<CR>
-
-"" Remove trailing whitespace
-function! Preserve(command)
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    execute a:command
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction 
-nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
-nmap _= :call Preserve("normal gg=G")<CR>
 
 """"""""""""""""""
 " Library Config "
@@ -286,7 +292,8 @@ let g:user_emmet_settings = {
             \}
 
 "" NERDTree
-map <C-n> :NERDTreeToggle<CR><C-W>=
+map <C-\> :NERDTreeToggle<CR><C-W>=
+map <C-]> :NERDTreeFind<CR><C-W>=
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "" vim-jsx
@@ -299,11 +306,48 @@ let g:indent_guides_guide_size = 1
 
 "" ale
 let g:ale_sign_column_always = 1
-set statusline=%(%f%m%r%h%w%)\ %(%#Error#%{ALEGetStatusLine()}%#StatusLine#%)
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
-let g:ale_statusline_format = [' ⨉ %d ', ' ⚠ %d ', '']
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 0
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" let g:ale_sign_error = '>>'
+" let g:ale_sign_warning = '--'
+" let g:ale_lint_on_save = 1
+" let g:ale_lint_on_text_changed = 0
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
+highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
+let g:ale_sign_error = 'X' " could use emoji
+let g:ale_sign_warning = '?' " could use emoji
+let g:ale_statusline_format = ['X %d', '? %d', '']
+" %linter% is the name of the linter that provided the message
+" %s is the error or warning message
+let g:ale_echo_msg_format = '%linter% says %s'
+" Map keys to navigate between lines with errors and warnings.
+nnoremap <leader>an :ALENextWrap<cr>
+nnoremap <leader>ap :ALEPreviousWrap<cr>
+
+"" airline
+" let g:airline_section_a = ''
+let g:airline_section_b = ''
+let g:airline_section_c = '%f %m%r%h%w%q'
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+let g:airline_section_z = '%l/%L:%c'
+" let g:airline_section_error = '%{ALEGetStatusLine()}'
+" let g:airline_section_warning = ''
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '' : 'V',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
+
+let g:vim_json_syntax_conceal = 0
+let g:javascript_plugin_flow = 1
+let g:javascript_plugin_jsdoc = 1
