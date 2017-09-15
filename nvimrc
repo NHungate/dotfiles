@@ -31,6 +31,7 @@ Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTr
 Plug 'chrisbra/NrrwRgn'
 Plug 'gregsexton/MatchTag'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'milkypostman/vim-togglelist'
 
 Plug 'tpope/vim-fugitive'
 Plug 'bronson/vim-trailing-whitespace'
@@ -218,10 +219,6 @@ nmap <Leader>b :FufBuffer<cr>
 nnoremap <Leader>O :source Session.vim<CR>
 nnoremap <leader>s :NERDTreeClose<CR>:mksession!<CR>
 
-"" Handle location window
-nnoremap <leader>lo :lopen<CR>
-nnoremap <leader>lc :lclose<CR>
-
 """""""""""""
 " Functions "
 """""""""""""
@@ -312,8 +309,8 @@ let g:ale_sign_column_always = 1
 " let g:ale_sign_warning = '--'
 " let g:ale_lint_on_save = 1
 " let g:ale_lint_on_text_changed = 0
-" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-" nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
 highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
@@ -324,8 +321,8 @@ let g:ale_statusline_format = ['X %d', '? %d', '']
 " %s is the error or warning message
 let g:ale_echo_msg_format = '%linter% says %s'
 " Map keys to navigate between lines with errors and warnings.
-nnoremap <leader>an :ALENextWrap<cr>
-nnoremap <leader>ap :ALEPreviousWrap<cr>
+" nnoremap <leader>an :ALENextWrap<cr>
+" nnoremap <leader>ap :ALEPreviousWrap<cr>
 
 "" airline
 " let g:airline_section_a = ''
