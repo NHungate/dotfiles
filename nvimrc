@@ -19,6 +19,7 @@ Plug 'vim-scripts/FuzzyFinder' | Plug 'vim-scripts/L9'
 "" Completion
 Plug 'Shougo/neosnippet' | Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'jiangmiao/auto-pairs'
 
 "" UI
 Plug 'vim-airline/vim-airline'
@@ -78,8 +79,6 @@ set cpt-=t
 let mapleader="\<Space>"
 
 "" Colors
-" colorscheme molokai
-
 set termguicolors
 set background=dark
 let g:gruvbox_sign_column = "bg0"
@@ -101,8 +100,6 @@ set colorcolumn=80        " Make a mark for column 80
 set wildmode=list:longest " Show list of commands with Tab completion
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 set list
-" set splitright
-" set splitbelow
 
 "" Search Improvements
 set hlsearch        " highlight matches
@@ -113,7 +110,7 @@ set ignorecase      " Search is case insensitive
 set foldenable        " enable folding
 set foldlevelstart=10 " open most folds by default
 set foldnestmax=10    " 10 nested folds max
-set foldmethod=syntax " auto-fold based on indentation
+set foldmethod=indent " auto-fold based on indentation
 
 "" Buffer
 au BufRead,BufNewFile *.md set filetype=markdown " .md = markdown syntax
@@ -210,14 +207,14 @@ nmap <Leader>P "+P
 nmap <C-k>g :Goyo<CR>
 
 "" Buffer navigation binds
-nmap <leader>n :bn<cr>
-nmap <leader>N :bp<cr>
-nmap <silent> <leader>D :bp\|bd #<CR>
+nmap <Leader>n :bn<cr>
+nmap <Leader>N :bp<cr>
+nmap <silent> <Leader>D :bp\|bd #<CR>
 nmap <Leader>b :FufBuffer<cr>
 
 "" Create a VIM session to resume
 nnoremap <Leader>O :source Session.vim<CR>
-nnoremap <leader>s :NERDTreeClose<CR>:mksession!<CR>
+nnoremap <Leader>s :NERDTreeClose<CR>:mksession!<CR>
 
 """""""""""""
 " Functions "
@@ -234,7 +231,7 @@ nnoremap <C-w>t :call BotTerm()<CR>
 
 "" FZF
 nmap <C-p> :Files<CR>
-nmap <leader>b :Buffers<CR>
+nmap <Leader>b :Buffers<CR>
 let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 
 "" The Silver Searcher
@@ -259,14 +256,14 @@ let g:deoplete#omni#functions.javascript = [
 \]
 
 " Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+" Note: It must be "imap" and "smap". It uses <Plug> mappings.
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" Note: It must be "imap" and "smap". It uses <Plug> mappings.
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
             \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
@@ -305,10 +302,6 @@ let g:indent_guides_guide_size = 1
 
 "" ale
 let g:ale_sign_column_always = 1
-" let g:ale_sign_error = '>>'
-" let g:ale_sign_warning = '--'
-" let g:ale_lint_on_save = 1
-" let g:ale_lint_on_text_changed = 0
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
@@ -317,22 +310,16 @@ highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
 let g:ale_sign_error = 'X' " could use emoji
 let g:ale_sign_warning = '?' " could use emoji
 let g:ale_statusline_format = ['X %d', '? %d', '']
-" %linter% is the name of the linter that provided the message
-" %s is the error or warning message
+""" %linter% is the name of the linter that provided the message
+""" %s is the error or warning message
 let g:ale_echo_msg_format = '%linter% says %s'
-" Map keys to navigate between lines with errors and warnings.
-" nnoremap <leader>an :ALENextWrap<cr>
-" nnoremap <leader>ap :ALEPreviousWrap<cr>
 
 "" airline
-" let g:airline_section_a = ''
 let g:airline_section_b = ''
 let g:airline_section_c = '%f %m%r%h%w%q'
 let g:airline_section_x = ''
 let g:airline_section_y = ''
 let g:airline_section_z = '%l/%L:%c'
-" let g:airline_section_error = '%{ALEGetStatusLine()}'
-" let g:airline_section_warning = ''
 let g:airline_mode_map = {
     \ '__' : '-',
     \ 'n'  : 'N',
@@ -347,9 +334,11 @@ let g:airline_mode_map = {
     \ '' : 'S',
     \ }
 
+"" vim-javascript
 let g:vim_json_syntax_conceal = 0
 let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
 
+"" tern_for_vim
 let g:tern_show_argument_hints='on_hold'
 let g:tern_map_keys=1
