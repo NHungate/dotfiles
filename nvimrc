@@ -11,6 +11,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'justinmk/vim-dirvish'
 Plug 'godlygeek/tabular'
 
 "" Search
@@ -34,6 +35,7 @@ Plug 'chrisbra/NrrwRgn'
 Plug 'gregsexton/MatchTag'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'milkypostman/vim-togglelist'
+Plug 'tpope/vim-projectionist'
 
 "" Whitespace
 Plug 'bronson/vim-trailing-whitespace'
@@ -76,6 +78,7 @@ set cpt-=t
 " Vim Settings "
 """"""""""""""""
 
+let g:netrw_altfile=1
 "" Change leader to space
 let mapleader="\<Space>"
 
@@ -274,6 +277,7 @@ let g:user_emmet_settings = {
 map <C-\> :NERDTreeToggle<CR><C-W>=
 map <C-]> :NERDTreeFind<CR><C-W>=
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeHijackNetrw=0
 
 "" vim-jsx
 let g:jsx_ext_required = 0
@@ -322,3 +326,7 @@ let g:javascript_plugin_jsdoc = 1
 "" tern_for_vim
 let g:tern_show_argument_hints='on_hold'
 let g:tern_map_keys=1
+
+"" vim-dirvish
+""" Sort folders to top
+let g:dirvish_mode = ':sort ,^.*[\/],'
