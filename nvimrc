@@ -11,7 +11,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'justinmk/vim-dirvish'
+Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'godlygeek/tabular'
 
 "" Search
@@ -328,10 +328,7 @@ let g:javascript_plugin_jsdoc = 1
 let g:tern_show_argument_hints='on_hold'
 let g:tern_map_keys=1
 
-"" vim-dirvish
-""" Sort folders to top
-let g:dirvish_mode = ':sort ,^.*[\/],'
-
 """ vim-hardtime
 " let g:hardtime_default_on=1
 nmap <c-k>h :HardTimeToggle<CR>
+let g:list_of_normal_keys = ["h", "j", "k", "l", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
