@@ -36,6 +36,7 @@ Plug 'gregsexton/MatchTag'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'milkypostman/vim-togglelist'
 Plug 'tpope/vim-projectionist'
+Plug 'takac/vim-hardtime'
 
 "" Whitespace
 Plug 'bronson/vim-trailing-whitespace'
@@ -330,3 +331,7 @@ let g:tern_map_keys=1
 "" vim-dirvish
 """ Sort folders to top
 let g:dirvish_mode = ':sort ,^.*[\/],'
+
+""" vim-hardtime
+" let g:hardtime_default_on=1
+nmap <c-k>h :HardTimeToggle<CR>
