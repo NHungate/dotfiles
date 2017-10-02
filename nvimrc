@@ -13,6 +13,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'godlygeek/tabular'
+Plug 'ludovicchabant/vim-gutentags'
 
 "" Search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
@@ -20,7 +21,7 @@ Plug 'vim-scripts/FuzzyFinder' | Plug 'vim-scripts/L9'
 
 "" Completion
 Plug 'Shougo/neosnippet' | Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'roxma/nvim-completion-manager'
 Plug 'jiangmiao/auto-pairs'
 
 "" UI
@@ -236,20 +237,14 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-"" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-      \ 'tern#Complete'
-      \]
-
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap". It uses <Plug> mappings.
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
+imap <c-j>     <Plug>(neosnippet_expand_or_jump)
+vmap <c-j>     <Plug>(neosnippet_expand_or_jump)
+inoremap <silent> <c-u> <c-r>=cm#sources#neosnippet#trigger_or_popup("\<Plug>(neosnippet_expand_or_jump)")<cr>
+vmap <c-u>     <Plug>(neosnippet_expand_target)
+" expand parameters
+let g:neosnippet#enable_completed_snippet=1
 
 " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap". It uses <Plug> mappings.
@@ -325,10 +320,8 @@ let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
 
 "" tern_for_vim
-let g:tern_show_argument_hints='on_hold'
 let g:tern_map_keys=1
 
 """ vim-hardtime
-" let g:hardtime_default_on=1
 nmap <c-k>h :HardTimeToggle<CR>
 let g:list_of_normal_keys = ["h", "j", "k", "l", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
