@@ -86,6 +86,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
+export _Z_NO_RESOLVE_SYMLINKS=1
 . /usr/local/etc/profile.d/z.sh
+
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
