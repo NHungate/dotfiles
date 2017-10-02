@@ -21,7 +21,7 @@ Plug 'vim-scripts/FuzzyFinder' | Plug 'vim-scripts/L9'
 
 "" Completion
 Plug 'Shougo/neosnippet' | Plug 'Shougo/neosnippet-snippets'
-Plug 'roxma/nvim-completion-manager'
+Plug 'roxma/nvim-completion-manager' " pip3 install --user neovim jedi mistune psutil setproctitle
 Plug 'jiangmiao/auto-pairs'
 
 "" UI
