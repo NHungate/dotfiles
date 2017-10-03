@@ -321,7 +321,13 @@ let g:javascript_plugin_jsdoc = 1
 
 "" tern_for_vim
 let g:tern_map_keys=1
+nmap <F11> :TernDefPreview<CR>
+nmap <F12> :TernDef<CR>
 
 """ vim-hardtime
 nmap <c-k>h :HardTimeToggle<CR>
 let g:list_of_normal_keys = ["h", "j", "k", "l", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+
+"" Goyo
+nmap <c-k>z :Goyo<CR>
+

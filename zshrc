@@ -7,8 +7,9 @@ export ZSH=/Users/nathanhungate/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
-ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
+# ZSH_THEME="agnoster"
+# ZSH_THEME="refined"
 DEFAULT_USER="$USER"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -86,7 +87,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export _Z_NO_RESOLVE_SYMLINKS=1
+# export _Z_NO_RESOLVE_SYMLINKS=1
 . /usr/local/etc/profile.d/z.sh
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
