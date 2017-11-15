@@ -184,6 +184,12 @@ nmap <F5> :checktime<CR>
 nnoremap ' `
 nnoremap ` '
 
+"" Exit terminal with Esc or insert Esc with C-v
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <C-v><Esc> <Esc>
+endif
+
 "" Convenient save mapping
 nnoremap <Leader>w :w<CR>
 
