@@ -47,7 +47,7 @@ Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
 Plug 'junegunn/goyo.vim'
 
 "" Colorschemes
-Plug 'morhetz/gruvbox'
+Plug 'rafi/awesome-vim-colorschemes'
 
 "" Web Development
 """ Syntax
@@ -80,7 +80,7 @@ set termguicolors
 set background=dark
 let g:gruvbox_sign_column = "bg0"
 let g:gruvbox_number_column = "bg1"
-colorscheme gruvbox
+colorscheme molokai
 
 "" Indentation
 set tabstop=2 " number of visual spaces per TAB
