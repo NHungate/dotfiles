@@ -3,47 +3,42 @@
 """"""""""""""""
 call plug#begin()
 
-"" My Plugins
+"" Essentials
 Plug 'tpope/vim-sensible'
-Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'jeetsukumaran/vim-filebeagle'
-Plug 'godlygeek/tabular'
-Plug 'ludovicchabant/vim-gutentags'
-
-"" Search
+Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-Plug 'vim-scripts/FuzzyFinder' | Plug 'vim-scripts/L9'
+Plug 'roxma/nvim-completion-manager' " pip3 install --user neovim jedi mistune psutil setproctitle
+Plug 'tmhedberg/matchit'
+Plug 'easymotion/vim-easymotion'
+Plug 'airblade/vim-gitgutter'
+Plug 'jeetsukumaran/vim-filebeagle'
+Plug 'Shougo/neosnippet' | Plug 'Shougo/neosnippet-snippets'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'sheerun/vim-polyglot'
+Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'typescript', 'xml'] }
 
 "" Completion
-Plug 'Shougo/neosnippet' | Plug 'Shougo/neosnippet-snippets'
-Plug 'roxma/nvim-completion-manager' " pip3 install --user neovim jedi mistune psutil setproctitle
 Plug 'jiangmiao/auto-pairs'
 
 "" UI
 Plug 'vim-airline/vim-airline'
-Plug 'airblade/vim-gitgutter'
-Plug 'nathanaelkane/vim-indent-guides'
 
 "" Navigation
-Plug 'easymotion/vim-easymotion'
 Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
-Plug 'chrisbra/NrrwRgn'
 Plug 'gregsexton/MatchTag'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'milkypostman/vim-togglelist'
-Plug 'tpope/vim-projectionist'
 Plug 'takac/vim-hardtime'
+Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-projectionist'
 
 "" Whitespace
 Plug 'bronson/vim-trailing-whitespace'
-
-"" Linting
-Plug 'w0rp/ale'
 
 "" Notes
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
@@ -56,14 +51,10 @@ Plug 'morhetz/gruvbox'
 
 "" Web Development
 """ Syntax
-Plug 'sheerun/vim-polyglot'
 Plug 'wokalski/autocomplete-flow'
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': ['javascript', 'javascript.jsx', 'typescript'] }
-
-""" HTML
-Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'typescript', 'xml'] }
 
 """ Javascript
+Plug 'roxma/nvim-cm-tern', { 'do': 'npm install' }
 Plug 'moll/vim-node', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'typescript', 'xml'] }
 Plug 'sbdchd/neoformat'
@@ -245,6 +236,7 @@ inoremap <silent> <c-u> <c-r>=cm#sources#neosnippet#trigger_or_popup("\<Plug>(ne
 vmap <c-u>     <Plug>(neosnippet_expand_target)
 " expand parameters
 let g:neosnippet#enable_completed_snippet=1
+let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
 
 " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap". It uses <Plug> mappings.
