@@ -8,8 +8,8 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tomtom/tcomment_vim'
 Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'roxma/nvim-completion-manager' " pip3 install --user neovim jedi mistune psutil setproctitle
@@ -21,6 +21,8 @@ Plug 'Shougo/neosnippet' | Plug 'Shougo/neosnippet-snippets'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'typescript', 'xml'] }
+Plug 'dhruvasagar/vim-zoom'
+Plug 'mhinz/vim-grepper'
 
 "" Completion
 Plug 'jiangmiao/auto-pairs'
@@ -36,6 +38,7 @@ Plug 'milkypostman/vim-togglelist'
 Plug 'takac/vim-hardtime'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-projectionist'
+Plug 'bronson/vim-visual-star-search'
 
 "" Whitespace
 Plug 'bronson/vim-trailing-whitespace'
@@ -80,7 +83,7 @@ set termguicolors
 set background=dark
 let g:gruvbox_sign_column = "bg0"
 let g:gruvbox_number_column = "bg1"
-colorscheme molokai
+colorscheme gruvbox
 
 "" Indentation
 set tabstop=2 " number of visual spaces per TAB
@@ -97,6 +100,13 @@ set colorcolumn=80 " Make a mark for column 80
 set wildmode=list:longest " Show list of commands with Tab completion
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 set list
+set mouse=a " Enable mouse events in supported terminals
+
+"" Terminal cursor highlight
+if has('nvim')
+  highlight! link TermCursor Cursor
+  highlight! TermCursorNC guibg=red guifg=white ctermbg=1 ctermfg=15
+endif
 
 "" Search Improvements
 set hlsearch " highlight matches
@@ -208,10 +218,32 @@ nmap <Leader>P "+P
 
 "" Buffer navigation binds
 nmap <silent> <Leader>D :bp\|bd #<CR>
+nnoremap <M-h> <c-w>h
+nnoremap <M-j> <c-w>j
+nnoremap <M-k> <c-w>k
+nnoremap <M-l> <c-w>l
+inoremap <M-h> <c-w>h
+inoremap <M-j> <c-w>j
+inoremap <M-k> <c-w>k
+inoremap <M-l> <c-w>l
+vnoremap <M-h> <c-w>h
+vnoremap <M-j> <c-w>j
+vnoremap <M-k> <c-w>k
+vnoremap <M-l> <c-w>l
+if has('nvim')
+  tnoremap <M-h> <c-\><c-n><c-w>h
+  tnoremap <M-j> <c-\><c-n><c-w>j
+  tnoremap <M-k> <c-\><c-n><c-w>k
+  tnoremap <M-l> <c-\><c-n><c-w>l
+endif
 
 "" Create a VIM session to resume
 nnoremap <Leader>O :source Session.vim<CR>
 nnoremap <Leader>s :NERDTreeClose<CR>:mksession!<CR>
+
+""""""""""""
+" Terminal "
+""""""""""""
 
 """"""""""""""""""
 " Library Config "
@@ -268,8 +300,8 @@ let g:user_emmet_settings = {
       \}
 
 "" NERDTree
-map <C-\> :NERDTreeToggle<CR><C-W>=
-map <C-]> :NERDTreeFind<CR><C-W>=
+map <C-\> :NERDTreeToggle<CR>
+map <C-]> :NERDTreeFind<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeHijackNetrw=0
 
@@ -329,3 +361,17 @@ let g:list_of_normal_keys = ["h", "j", "k", "l", "+", "<UP>", "<DOWN>", "<LEFT>"
 "" Goyo
 nmap <c-k>z :Goyo<CR>
 
+"" Grepper
+let g:grepper = {}
+let g:grepper.tools = ['grep', 'git', 'rg']
+
+" Search for the current word
+nnoremap <Leader>* :Grepper -cword -noprompt<CR>
+
+" Search for the current selection
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+
+" Open Grepper-prompt for a particular Grep-alike tool
+nnoremap <Leader>g :Grepper -tool git<CR>
+nnoremap <Leader>G :Grepper -tool rg<CR>

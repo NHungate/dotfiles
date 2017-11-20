@@ -88,6 +88,15 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # export _Z_NO_RESOLVE_SYMLINKS=1
+
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+  if [ -x "$(command -v nvr)" ]; then
+    alias nvim=nvr
+  else
+    alias nvim='echo "No nesting!"'
+  fi
+fi
+
 . /usr/local/etc/profile.d/z.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
