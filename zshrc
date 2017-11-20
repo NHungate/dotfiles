@@ -89,6 +89,7 @@ source $ZSH/oh-my-zsh.sh
 
 # export _Z_NO_RESOLVE_SYMLINKS=1
 
+export VISUAL='nvim'
 if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
   if [ -x "$(command -v nvr)" ]; then
     alias nvim=nvr
