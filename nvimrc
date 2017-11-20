@@ -23,6 +23,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'typescript', 'xml'] }
 Plug 'dhruvasagar/vim-zoom'
 Plug 'mhinz/vim-grepper'
+Plug 'machakann/vim-highlightedyank'
 
 "" Completion
 Plug 'jiangmiao/auto-pairs'
@@ -112,6 +113,7 @@ endif
 set hlsearch " highlight matches
 set smartcase " case-sensitive when capitals are used
 set ignorecase " Search is case insensitive
+set inccommand=nosplit " Highlight and live update while substituting
 
 "" Folding
 set foldenable " enable folding
