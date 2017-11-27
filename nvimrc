@@ -21,7 +21,6 @@ Plug 'Shougo/neosnippet' | Plug 'Shougo/neosnippet-snippets'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'typescript', 'xml'] }
-Plug 'dhruvasagar/vim-zoom'
 Plug 'mhinz/vim-grepper'
 Plug 'machakann/vim-highlightedyank'
 
@@ -30,6 +29,7 @@ Plug 'jiangmiao/auto-pairs'
 
 "" UI
 Plug 'vim-airline/vim-airline'
+Plug 'dhruvasagar/vim-zoom'
 
 "" Navigation
 Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
@@ -369,6 +369,7 @@ let g:grepper.tools = ['rg', 'grep', 'git']
 
 " Search for the current word
 nnoremap <Leader>* :Grepper -cword -noprompt<CR>
+vnoremap <Leader>* :Grepper -cword -noprompt<CR>
 
 " Search for the current selection
 nmap gs <plug>(GrepperOperator)
