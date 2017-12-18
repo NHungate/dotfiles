@@ -268,22 +268,6 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-" Plugin key-mappings.
-" Note: It must be "imap" and "smap". It uses <Plug> mappings.
-" imap <C-j> <Plug>(neosnippet_expand_or_jump)
-" imap <C-k> <Plug>(neosnippet_expand_or_jump)
-" vmap <C-j> <Plug>(neosnippet_expand_or_jump)
-" vmap <C-u> <Plug>(neosnippet_expand_target)
-" inoremap <silent> <C-u> <C-r>=cm#sources#neosnippet#trigger_or_popup("\<Plug>(neosnippet_expand_or_jump)")<CR>
-"
-" " expand parameters
-" let g:neosnippet#enable_completed_snippet=1
-" let g:neosnippet#enable_snipmate_compatibility = 1
-" let g:neosnippet#snippets_directory='~/.config/nvim/plugged/vim-snippets/snippets'
-
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap". It uses <Plug> mappings.
-
 " For conceal markers.
 if has('conceal')
   set conceallevel=2 concealcursor=niv
