@@ -17,7 +17,7 @@ Plug 'tmhedberg/matchit'
 Plug 'easymotion/vim-easymotion'
 Plug 'airblade/vim-gitgutter'
 Plug 'jeetsukumaran/vim-filebeagle'
-Plug 'Shougo/neosnippet' | Plug 'Shougo/neosnippet-snippets'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'typescript', 'xml'] }
@@ -95,7 +95,7 @@ set expandtab " tabs are spaces
 "" UI Config
 set number " show line numbers
 set showcmd " show command in bottom bar
-set lazyredraw " redraw only when we need to
+" set lazyredraw " redraw only when we need to
 set showmatch " Show matching bracket
 set colorcolumn=80 " Make a mark for column 80
 set wildmode=list:longest " Show list of commands with Tab completion
@@ -270,17 +270,19 @@ endif
 
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap". It uses <Plug> mappings.
-imap <c-j>     <Plug>(neosnippet_expand_or_jump)
-vmap <c-j>     <Plug>(neosnippet_expand_or_jump)
-inoremap <silent> <c-u> <c-r>=cm#sources#neosnippet#trigger_or_popup("\<Plug>(neosnippet_expand_or_jump)")<cr>
-vmap <c-u>     <Plug>(neosnippet_expand_target)
-" expand parameters
-let g:neosnippet#enable_completed_snippet=1
-let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+" imap <C-j> <Plug>(neosnippet_expand_or_jump)
+" imap <C-k> <Plug>(neosnippet_expand_or_jump)
+" vmap <C-j> <Plug>(neosnippet_expand_or_jump)
+" vmap <C-u> <Plug>(neosnippet_expand_target)
+" inoremap <silent> <C-u> <C-r>=cm#sources#neosnippet#trigger_or_popup("\<Plug>(neosnippet_expand_or_jump)")<CR>
+"
+" " expand parameters
+" let g:neosnippet#enable_completed_snippet=1
+" let g:neosnippet#enable_snipmate_compatibility = 1
+" let g:neosnippet#snippets_directory='~/.config/nvim/plugged/vim-snippets/snippets'
 
 " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap". It uses <Plug> mappings.
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
 
 " For conceal markers.
 if has('conceal')
@@ -386,3 +388,10 @@ endif
 augroup vimrc
   autocmd BufWritePre /tmp/* setlocal noundofile
 augroup END
+
+if has('nvim') && executable('nvr')
+  let $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+endif
+
+"" Ultisnips
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "mySnippets"]
