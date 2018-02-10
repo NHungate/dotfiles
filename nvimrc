@@ -21,21 +21,21 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'typescript', 'xml'] }
-Plug 'mhinz/vim-grepper'
 Plug 'machakann/vim-highlightedyank'
+Plug 'wellle/targets.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'vim-airline/vim-airline'
 
 "" Completion
 Plug 'jiangmiao/auto-pairs'
 
 "" UI
-Plug 'vim-airline/vim-airline'
-Plug 'dhruvasagar/vim-zoom'
+Plug 'mhinz/vim-grepper'
+Plug 'milkypostman/vim-togglelist'
 
 "" Navigation
 Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'gregsexton/MatchTag'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'milkypostman/vim-togglelist'
 Plug 'takac/vim-hardtime'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-projectionist'
@@ -43,9 +43,6 @@ Plug 'bronson/vim-visual-star-search'
 
 "" Whitespace
 Plug 'bronson/vim-trailing-whitespace'
-
-"" Notes
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-notes'
 
 "" No-distraction editor mode
 Plug 'junegunn/goyo.vim'
@@ -55,7 +52,9 @@ Plug 'rafi/awesome-vim-colorschemes'
 
 "" Web Development
 """ Syntax
-Plug 'wokalski/autocomplete-flow'
+" Plug 'janko-m/vim-test'
+Plug 'wokalski/autocomplete-flow', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'] }
 
 """ Javascript
 Plug 'roxma/nvim-cm-tern', { 'do': 'npm install' }
@@ -101,7 +100,21 @@ set colorcolumn=80 " Make a mark for column 80
 set wildmode=list:longest " Show list of commands with Tab completion
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 set list
+
+"" Mouse Scroll disable
 set mouse=a " Enable mouse events in supported terminals
+nmap <ScrollWheelUp> <nop>
+nmap <S-ScrollWheelUp> <nop>
+nmap <C-ScrollWheelUp> <nop>
+nmap <ScrollWheelDown> <nop>
+nmap <S-ScrollWheelDown> <nop>
+nmap <C-ScrollWheelDown> <nop>
+nmap <ScrollWheelLeft> <nop>
+nmap <S-ScrollWheelLeft> <nop>
+nmap <C-ScrollWheelLeft> <nop>
+nmap <ScrollWheelRight> <nop>
+nmap <S-ScrollWheelRight> <nop>
+nmap <C-ScrollWheelRight> <nop>
 
 "" Terminal cursor highlight
 if has('nvim')
@@ -197,10 +210,10 @@ nnoremap ' `
 nnoremap ` '
 
 "" Exit terminal with Esc or insert Esc with C-v
-if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
-  tnoremap <C-v><Esc> <Esc>
-endif
+" if has('nvim')
+"   tnoremap <Esc> <C-\><C-n>
+"   tnoremap <C-v><Esc> <Esc>
+" endif
 
 "" Convenient save mapping
 nnoremap <Leader>w :w<CR>
@@ -220,32 +233,10 @@ nmap <Leader>P "+P
 
 "" Buffer navigation binds
 nmap <silent> <Leader>D :bp\|bd #<CR>
-nnoremap <M-h> <c-w>h
-nnoremap <M-j> <c-w>j
-nnoremap <M-k> <c-w>k
-nnoremap <M-l> <c-w>l
-inoremap <M-h> <c-w>h
-inoremap <M-j> <c-w>j
-inoremap <M-k> <c-w>k
-inoremap <M-l> <c-w>l
-vnoremap <M-h> <c-w>h
-vnoremap <M-j> <c-w>j
-vnoremap <M-k> <c-w>k
-vnoremap <M-l> <c-w>l
-if has('nvim')
-  tnoremap <M-h> <c-\><c-n><c-w>h
-  tnoremap <M-j> <c-\><c-n><c-w>j
-  tnoremap <M-k> <c-\><c-n><c-w>k
-  tnoremap <M-l> <c-\><c-n><c-w>l
-endif
 
 "" Create a VIM session to resume
 nnoremap <Leader>O :source Session.vim<CR>
 nnoremap <Leader>s :NERDTreeClose<CR>:mksession!<CR>
-
-""""""""""""
-" Terminal "
-""""""""""""
 
 """"""""""""""""""
 " Library Config "
@@ -331,6 +322,7 @@ let g:airline_mode_map = {
       \ 'S'  : 'S',
       \ '' : 'S',
       \ }
+let g:airline#extensions#tabline#enabled = 1
 
 "" vim-javascript
 let g:vim_json_syntax_conceal = 0
@@ -343,11 +335,11 @@ nmap <F11> :TernDefPreview<CR>
 nmap <F12> :TernDef<CR>
 
 """ vim-hardtime
-nmap <c-k>h :HardTimeToggle<CR>
-let g:list_of_normal_keys = ["h", "j", "k", "l", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+" nmap <c-k>h :HardTimeToggle<CR>
+" let g:list_of_normal_keys = ["h", "j", "k", "l", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
 
 "" Goyo
-nmap <c-k>z :Goyo<CR>
+" nmap <c-k>z :Goyo<CR>
 
 "" Grepper
 let g:grepper = {}
@@ -365,17 +357,43 @@ xmap gs <plug>(GrepperOperator)
 nnoremap <Leader>g :Grepper -tool git<CR>
 nnoremap <Leader>G :Grepper -tool rg<CR>
 
+"" Persistant undo
 set undofile
 if !has('nvim')
   set undodir=~/.vim/undo
 endif
+
 augroup vimrc
   autocmd BufWritePre /tmp/* setlocal noundofile
 augroup END
 
+"" Use nvr in nvim term mode
 if has('nvim') && executable('nvr')
   let $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
 endif
 
 "" Ultisnips
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mySnippets"]
+
+"" Tmux navigator
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <M-h> :TmuxNavigateLeft<CR>
+nnoremap <silent> <M-j> :TmuxNavigateDown<CR>
+nnoremap <silent> <M-k> :TmuxNavigateUp<CR>
+nnoremap <silent> <M-l> :TmuxNavigateRight<CR>
+inoremap <silent> <M-h> <Esc>:TmuxNavigateLeft<CR>
+inoremap <silent> <M-j> <Esc>:TmuxNavigateDown<CR>
+inoremap <silent> <M-k> <Esc>:TmuxNavigateUp<CR>
+inoremap <silent> <M-l> <Esc>:TmuxNavigateRight<CR>
+vnoremap <silent> <M-h> :TmuxNavigateLeft<CR>
+vnoremap <silent> <M-j> :TmuxNavigateDown<CR>
+vnoremap <silent> <M-k> :TmuxNavigateUp<CR>
+vnoremap <silent> <M-l> :TmuxNavigateRight<CR>
+if has('nvim')
+  tnoremap <silent> <M-h> <c-\><c-n>:TmuxNavigateLeft<CR>
+  tnoremap <silent> <M-j> <c-\><c-n>:TmuxNavigateDown<CR>
+  tnoremap <silent> <M-k> <c-\><c-n>:TmuxNavigateUp<CR>
+  tnoremap <silent> <M-l> <c-\><c-n>:TmuxNavigateRight<CR>
+endif
+
+let g:flow#showquickfix = 0
