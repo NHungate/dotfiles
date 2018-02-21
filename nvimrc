@@ -18,7 +18,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'airblade/vim-gitgutter'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Yggdroot/indentLine'
 Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'typescript', 'xml'] }
 Plug 'machakann/vim-highlightedyank'
@@ -100,6 +100,7 @@ set colorcolumn=80 " Make a mark for column 80
 set wildmode=list:longest " Show list of commands with Tab completion
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 set list
+set splitbelow splitright
 
 "" Mouse Scroll disable
 set mouse=a " Enable mouse events in supported terminals
@@ -287,11 +288,6 @@ let g:NERDTreeHijackNetrw=0
 "" vim-jsx
 let g:jsx_ext_required = 0
 
-"" indent guides
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=8
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_guide_size = 1
-
 "" ale
 let g:ale_sign_column_always = 1
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
@@ -327,7 +323,7 @@ let g:airline#extensions#tabline#enabled = 1
 "" vim-javascript
 let g:vim_json_syntax_conceal = 0
 let g:javascript_plugin_flow = 1
-let g:javascript_plugin_jsdoc = 1
+" let g:javascript_plugin_jsdoc = 1
 
 "" tern_for_vim
 let g:tern_map_keys=1
@@ -396,4 +392,5 @@ if has('nvim')
   tnoremap <silent> <M-l> <c-\><c-n>:TmuxNavigateRight<CR>
 endif
 
+let g:flow#enable = 0
 let g:flow#showquickfix = 0
