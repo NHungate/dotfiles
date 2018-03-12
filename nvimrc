@@ -10,24 +10,24 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-fugitive'
 Plug 'tomtom/tcomment_vim'
-Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'roxma/nvim-completion-manager' " pip3 install --user neovim jedi mistune psutil setproctitle
 Plug 'tmhedberg/matchit'
 Plug 'easymotion/vim-easymotion'
-Plug 'airblade/vim-gitgutter'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'Yggdroot/indentLine'
 Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'typescript', 'xml'] }
 Plug 'machakann/vim-highlightedyank'
 Plug 'wellle/targets.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
 
-"" Completion
-Plug 'jiangmiao/auto-pairs'
+"" Causes visual issues
+Plug 'w0rp/ale'
+Plug 'airblade/vim-gitgutter'
+Plug 'nathanaelkane/vim-indent-guides'
 
 "" UI
 Plug 'mhinz/vim-grepper'
@@ -40,20 +40,23 @@ Plug 'takac/vim-hardtime'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-projectionist'
 Plug 'bronson/vim-visual-star-search'
+Plug 'chrisbra/NrrwRgn'
 
 "" Whitespace
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'godlygeek/tabular'
 
 "" No-distraction editor mode
 Plug 'junegunn/goyo.vim'
 
 "" Colorschemes
 Plug 'rafi/awesome-vim-colorschemes'
+" Plug 'morhetz/gruvbox'
 
 "" Web Development
 """ Syntax
 " Plug 'janko-m/vim-test'
-Plug 'wokalski/autocomplete-flow', { 'for': ['javascript', 'javascript.jsx'] }
+" Plug 'wokalski/autocomplete-flow', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'] }
 
 """ Javascript
@@ -77,13 +80,22 @@ set cpt-=t
 let g:netrw_altfile=1
 "" Change leader to space
 let mapleader="\<Space>"
+map <Leader>a ggVG
 
 "" Colors
 set termguicolors
 set background=dark
-let g:gruvbox_sign_column = "bg0"
-let g:gruvbox_number_column = "bg1"
 colorscheme gruvbox
+
+"" Backups
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+
+"" Persistant undo
+set undofile
+if !has('nvim')
+  set undodir=~/.vim/undo//
+endif
 
 "" Indentation
 set tabstop=2 " number of visual spaces per TAB
@@ -92,9 +104,17 @@ set shiftwidth=2 " indenting is 2 spaces
 set expandtab " tabs are spaces
 
 "" UI Config
-set number " show line numbers
+""" Show absolute line numbers in insert mode and relative line numbers in other modes
+set number relativenumber
+
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
 set showcmd " show command in bottom bar
-" set lazyredraw " redraw only when we need to
+set lazyredraw " redraw only when we need to
 set showmatch " Show matching bracket
 set colorcolumn=80 " Make a mark for column 80
 set wildmode=list:longest " Show list of commands with Tab completion
@@ -144,6 +164,16 @@ set hidden " deleted buffers are hidden instead
 "" General Usability Improvements
 set title " title of window = vim
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Prevent comment insertion
+
+"" Ignore folders and specific files
+""" Lib folders
+set wildignore+=*/lib/**,*/_3rd_party_/**,*/node_modules/**,*/bower_components/**
+
+""" Images
+set wildignore+=*.png,*.PNG,*.jpg,*.jpeg,*.JPG,*.JPEG,*.pdf
+
+""" Fonts
+set wildignore+=*.ttf,*.otf,*.woff,*.woff2,*.eot
 
 "" Change Default Behaviors
 set timeout
@@ -205,6 +235,9 @@ set directory=~/.config/nvim/backup/
 
 "" Check if files have changed
 nmap <F5> :checktime<CR>
+
+"" Alt. buffer shortcut
+nnoremap <BS> <C-^>
 
 "" Switch ' to more useful `
 nnoremap ' `
@@ -318,7 +351,8 @@ let g:airline_mode_map = {
       \ 'S'  : 'S',
       \ '' : 'S',
       \ }
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
+let g:airline_extensions = []
 
 "" vim-javascript
 let g:vim_json_syntax_conceal = 0
@@ -352,12 +386,6 @@ xmap gs <plug>(GrepperOperator)
 " Open Grepper-prompt for a particular Grep-alike tool
 nnoremap <Leader>g :Grepper -tool git<CR>
 nnoremap <Leader>G :Grepper -tool rg<CR>
-
-"" Persistant undo
-set undofile
-if !has('nvim')
-  set undodir=~/.vim/undo
-endif
 
 augroup vimrc
   autocmd BufWritePre /tmp/* setlocal noundofile
@@ -394,3 +422,37 @@ endif
 
 let g:flow#enable = 0
 let g:flow#showquickfix = 0
+
+"" NrrwRgn
+nmap <F3> <Plug>NrrwrgnWinIncr
+
+"" Lightline
+let g:lightline = {}
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+
+let g:lightline.component_type = {
+      \     'linter_checking': 'warning',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
+let g:lightline.component_function = { 'filename': 'LightLineFilename' }
+
+function! LightLineFilename()
+  " return pathshorten(fnamemodify(expand('%'),':~:.'))
+  return expand('%')
+endfunction
+
+let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings' ]] }
+
+
+"" Hardtime
+let g:hardtime_default_on = 1
+let g:hardtime_maxcount = 5
+let g:list_of_normal_keys = ["h", "j", "k", "l", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+let g:list_of_visual_keys = ["h", "j", "k", "l", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
